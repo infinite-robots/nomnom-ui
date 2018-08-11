@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     establishSocket() {
-      const socket = SocketIO(`http://142.93.118.93:8088/rooms/${this.roomId}/meta`);
+      const socket = SocketIO(`http://142.93.118.93:8088/rooms/${this.roomId}/meta`, { origins: 'http://nomnom.site' });
       this.socket = socket;
       socket.on('connect', () => {
         socket.emit('join', this.user);
