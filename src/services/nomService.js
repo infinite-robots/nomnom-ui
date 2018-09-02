@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { getNick } from './auth';
 
-const apiRoot = 'http://localhost:8088';
+// const apiRoot = 'http://localhost:8088';
+const apiRoot = 'http://142.93.118.93:8088';
 
 export function makeRoom(searchLocation, searchRadius) {
   return axios.post(`${apiRoot}/makeroom`, { user: getNick(), searchLocation, searchRadius });
