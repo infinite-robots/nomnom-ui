@@ -1,34 +1,84 @@
 <template>
-  <div class="room">
-    <h2>nom id: {{ roomId }}</h2>
-    <h3>created by {{ admin }}</h3>
-    <p>
-      {{ users.length }} users in room: {{ users.join(', ') }}
-    </p>
-    <div v-if="!start">
-      <p v-if="user !== admin">Waiting for {{ admin }} to start...</p>
-      <p v-else><button @click="startNomming">Start</button></p>
-    </div>
-    <div v-if="start && !winner" class="noms">
-      <div class="nom" v-if="nomnoms.length > 0">
-        <p>Name: {{ nomnoms[0].name }}</p>
-        <p>Category: {{ nomnoms[0].category }}</p>
-        <p>Price: {{ nomnoms[0].priceRange }}</p>
-        <p>
-          <button class="nah" @click="voteNah">Nah.</button>
-          <button class="yum" @click="voteYum">Yum!</button>
-        </p>
+  <v-layout row>
+    <v-flex xs12 sm6 offset-sm3>
+      <v-card v-if="!start && !winner">
+        <v-card-title primary-title>
+          <div class="room-wrap">
+            <div class="headline">Waiting to start...</div>
+            <div class="room">
+              <p class="subheading">Share this link to your friends to have them join: <a href="#">http://nomnom.site/nom/{{ roomId }}</a></p>
+              <h3>created by {{ admin }}</h3>
+              <p>
+                {{ users.length }} users in room: {{ users.join(', ') }}
+              </p>
+              <div v-if="!start">
+                <p v-if="user !== admin">Waiting for {{ admin }} to start...</p>
+                <p v-else><v-btn color="primary" @click="startNomming">Start</v-btn></p>
+              </div>
+            </div>
+          </div>
+        </v-card-title>
+      </v-card>
+
+      <div v-if="start && !winner" class="noms">
+        <div class="instructions" v-if="nomnoms.length > 0">
+          <h1>Would you eat here?</h1>
+          <p>Keep swiping left and right. When your group reaches and agreement, we'll let you know!</p>
+        </div>
+        <v-card class="nom" v-if="nomnoms.length > 0">
+          <v-img
+            :src="nomnoms[0].image_url"
+            height="200px"
+          >
+          </v-img>
+
+          <v-card-title primary-title>
+            <div class="nom">
+              <div class="headline">{{ nomnoms[0].name }}</div>
+              <p class="grey--text">
+                <v-chip color="secondary" v-for="cat in nomnoms[0].categories" :key="cat.title">{{ cat.title}}</v-chip>
+              </p>
+              <p class="rating">Yelp Rating: <v-rating v-model="nomnoms[0].rating" half-increments readonly background-color="#cccccc"></v-rating></p>
+              <p class="price">Price Range: {{nomnoms[0].price}}</p>
+            </div>
+          </v-card-title>
+
+          <v-card-actions>
+            <v-btn @click="voteNah">Nah</v-btn>
+            <v-btn @click="voteYum" color="primary">Yum!</v-btn>
+          </v-card-actions>
+        </v-card>
       </div>
-    </div>
-    <div v-if="outOfNoms && !winner">
-      <p>No more options left... maybe try being a little less picky next time</p>
-    </div>
-    <div v-if="winner" class="winner">
-      <h1>WINNER!</h1>
-      <p>Here's your NomNom</p>
-      <h2>{{ winningNom.name }}</h2>
-    </div>
-  </div>
+      <div v-if="outOfNoms && !winner">
+        <p>No more options left... maybe try being a little less picky next time</p>
+      </div>
+      <div v-if="winner" class="winner">
+        <h1>WINNER!</h1>
+        <p>Here's your NomNom:</p>
+        <v-card class="nom">
+          <v-img
+            :src="winningNom.image_url"
+            height="200px"
+          >
+          </v-img>
+
+          <v-card-title primary-title>
+            <div class="nom">
+              <div class="headline">{{ winningNom.name }}</div>
+              <p class="grey--text">
+                <v-chip color="secondary" v-for="cat in winningNom.categories" :key="cat.title">{{ cat.title}}</v-chip>
+              </p>
+              <p>
+                {{ winningNom.location.display_address.join(', ') }}
+              </p>
+              <p><a :href="'https://www.google.com/maps/place/' + encodeURI(winningNom.location.display_address.join(', '))" target="_blank" rel="noopener">Open in google maps</a></p>
+            </div>
+          </v-card-title>
+        </v-card>
+      </div>
+
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -112,14 +162,11 @@ export default {
 };
 </script>
 
-<style scoped>
-.nom {
-  border: 2px solid #ccc;
-  border-radius: 5px;
+<style>
+.room-wrap, .nom {
+  width: 100%;
 }
-.winner {
-  background: #FCAA3A;
-  color: #FFF;
-  padding: 2rem;
+.v-card__actions {
+  justify-content: space-between;
 }
 </style>

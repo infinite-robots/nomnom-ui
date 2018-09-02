@@ -3,8 +3,8 @@ import { getNick } from './auth';
 
 const apiRoot = 'http://localhost:8088';
 
-export function makeRoom() {
-  return axios.post(`${apiRoot}/makeroom`, { user: getNick() });
+export function makeRoom(searchLocation, searchRadius) {
+  return axios.post(`${apiRoot}/makeroom`, { user: getNick(), searchLocation, searchRadius });
 }
 
 export function getNomsForUser(roomId) {

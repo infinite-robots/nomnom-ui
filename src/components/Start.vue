@@ -1,16 +1,26 @@
 <template>
-  <div class="start">
-    <h1>NOMNOM!</h1>
-    <p>
-      NomNom helps your group pick a place to eat without all the back and forth conversation.
-      Swipe left and right on food choices until the team comes to an agreement!
-    </p>
-    <div class="nick-form">
-      <input class="input" v-model="nickname" type="text"
-        placeholder="choose a nickname" minlength="2" maxlength="15"/>
-      <button class="button" @click="login()">Continue</button>
-    </div>
-  </div>
+  <v-layout row>
+    <v-flex xs12 sm6 offset-sm3>
+      <v-card>
+        <v-card-title primary-title>
+          <div>
+            <div class="headline">NomNominate a place to eat</div>
+            <div class="start">
+              <p>
+                NomNom helps your group pick a place to eat without all the back and forth conversation.
+                Swipe left and right on food choices until the team comes to an agreement!
+              </p>
+              <div class="nick-form">
+                <v-text-field  v-model="nickname"  label="Choose a nickname" required></v-text-field>
+                <v-btn color="primary" @click="login()">Continue</v-btn>
+              </div>
+            </div>
+          </div>
+        </v-card-title>
+
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>

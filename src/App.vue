@@ -1,38 +1,68 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+  <v-app id="nomnom">
+    <v-navigation-drawer
+      color="primary"
+      v-model="drawer"
+      fixed
+      app
+    >
+      <v-list dense>
+        <v-list-tile @click="$router.push('/')">
+          <v-list-tile-action>
+            <v-icon>home</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Home</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon>contact_mail</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Contact</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar color="primary" dark fixed app>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title>NomNom</v-toolbar-title>
+    </v-toolbar>
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout
+          justify-center
+          align-center
+        >
+          <v-flex text-xs-center>
+            <router-view></router-view>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+    <v-footer color="primary" app>
+      <v-layout justify-center row wrap>
+        <span class="white--text">&copy; 2018</span>
+      </v-layout>
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
-export default {
-  name: 'App',
-};
+  export default {
+    data: () => ({
+      drawer: false
+    }),
+
+    props: {
+      source: String
+    }
+  }
 </script>
 
 <style>
-body {
-  background: #f8f8f8;
-  margin: 0;
-  padding: 0;
-  font-family: 'Assistant', sans-serif;
-}
-#app {
-  max-width: 500px;
-  margin: 2rem auto 2rem;
-  background: #FFF;
-  text-align: center;
-  padding: 2rem;
-  height: calc(100vh - 8rem);
-}
-h1 {
-  margin: 0 0 2rem;
-}
-.button {
-  border: 1px solid #000;
-  display: inline-block;
-  border-radius: 1rem;
-  padding: .5em 1em;
-  text-decoration: none;
+#nomnom *:not(.material-icons) {
+  font-family: 'Montserrat', sans-serif;
 }
 </style>
