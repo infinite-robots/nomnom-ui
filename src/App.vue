@@ -35,7 +35,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="primary" dark fixed app>
+    <v-toolbar color="primary" dark fixed flat app>
       <v-toolbar-title>NomNominate</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>

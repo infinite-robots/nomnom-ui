@@ -2,6 +2,9 @@
   width: 100%;
   text-align: left;
 }
+.headline {
+  margin-bottom: 8px;
+}
 .v-card__actions {
   justify-content: space-between;
 }
@@ -51,4 +54,8 @@
   height: 1px;
   padding: 0;
   margin: 0 0 24px;
+}
+.divider {
+  color: #ccc;
+  padding: 0 8px;
 }

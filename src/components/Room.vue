@@ -1,4 +1,13 @@
 <template>
+  <section class="nom-room">
+  <v-expansion-panel>
+    <v-expansion-panel-content>
+      <div slot="header">Room ID: <span class="sb">{{ roomId }}</span> <span class="divider">|</span> Host: <span class="sb">{{ admin }}</span></div>
+      <v-card>
+        <v-card-text>This will eventually show more info about the current room.</v-card-text>
+      </v-card>
+    </v-expansion-panel-content>
+  </v-expansion-panel>
   <v-layout row>
     <v-flex xs12 sm8 md6 offset-sm2 offset-md3 class="page-content">
       <v-card v-if="!start && !winner" class="top-card">
@@ -6,8 +15,11 @@
           <div class="room-wrap">
             <div class="headline">Waiting to start...</div>
             <div class="room">
-              <p class="subheading">Share this link to your friends to have them join: <a href="#">http://nomnom.site/nom/{{ roomId }}</a></p>
-              <h3>created by {{ admin }}</h3>
+              <p class="subheading share-text">Share this link with your friends to have them join:</p>
+              <p>
+                <input type="text" ref="nomlink" :value="'http://nomnom.site/nom/' +  roomId " readonly @focus="$event.target.select()" />
+                <a href="#" class="nou" @click.prevent="clipboard()">copy</a>
+              </p>
               <p>
                 {{ users.length }} users in room: {{ users.join(', ') }}
               </p>
@@ -103,8 +115,13 @@
       </v-card>
     </v-dialog>
 
+    <v-snackbar v-model="snackbar" :bottom="true">
+      Copied to Clipboard
+    </v-snackbar>
+
     </v-flex>
   </v-layout>
+  </section>
 </template>
 
 <script>
@@ -118,6 +135,7 @@ export default {
   data() {
     return {
       dialog: false,
+      snackbar: false,
       start: false,
       winner: false,
       winningNom: null,
@@ -202,6 +220,30 @@ export default {
     convertDistance(dist) {
       return (dist / 1609).toFixed(1) + ' miles';
     },
+    clipboard() {
+      this.$refs.nomlink.select();
+      document.execCommand('copy');
+      this.snackbar = true;
+    }
   },
 };
 </script>
+
+<style scoped>
+.share-text {
+  margin-bottom: 2px !important;
+}
+input[type="text"] {
+  cursor: text;
+  font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace !important;
+  padding: 3px 8px;
+  border-radius: 3px;
+  border: 1px solid #d1d5da;
+  box-shadow: inset 0 1px 2px rgba(27,31,35,0.075);
+  width: 240px;
+  background: #f8f8f8;
+}
+.nou {
+  text-decoration: none;
+}
+</style>

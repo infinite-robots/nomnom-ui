@@ -17,6 +17,17 @@
           </div>
         </v-card-title>
       </v-card>
+      <v-card class="top-card">
+        <v-card-title primary-title>
+          <div class="card-wrap">
+            <h1 class="headline">Other Questions</h1>
+            <h3>Can I change my nickname?</h3>
+            <p>Yes, <router-link to="/start">click here</router-link> to change your nickname.</p>
+            <h3>Where is the data coming from?</h3>
+            <p>We use the Yelp API.</p>
+          </div>
+        </v-card-title>
+      </v-card>
     </v-flex>
   </v-layout>
 </template>
@@ -27,11 +38,15 @@ export default {
 };
 </script>
 
-<style >
+<style scoped>
 .help span.caption {
     color: #aaa;
 }
 .help ol li {
     margin-bottom: 16px;
+}
+h3 {
+    font-weight: 500;
+    margin-bottom: 2px;
 }
 </style>

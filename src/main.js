@@ -9,7 +9,7 @@ import router from './router';
 
 Vue.use(Vuetify, {
   theme: {
-    primary: '#FCAA3A',
+    primary: '#f19a24',
     secondary: '#FFCD89'
   }
 });
