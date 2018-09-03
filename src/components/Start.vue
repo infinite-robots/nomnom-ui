@@ -1,10 +1,10 @@
 <template>
   <v-layout row>
     <v-flex xs12 sm6 offset-sm3>
-      <v-card>
+      <v-card class="top-card">
         <v-card-title primary-title>
-          <div>
-            <div class="headline">NomNominate a place to eat</div>
+          <div class="card-wrap">
+            <div class="headline">Choose a Nickname to Continue</div>
             <div class="start">
               <p>
                 NomNom helps your group pick a place to eat without all the back and forth conversation.
