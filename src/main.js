@@ -10,8 +10,7 @@ import router from './router';
 Vue.use(Vuetify, {
   theme: {
     primary: '#FCAA3A',
-    secondary: '#FFCCD2',
-    accent: '#3F51B5'
+    secondary: '#FFCD89'
   }
 });
 

@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/components/Home';
+import Create from '@/components/Create';
+import Help from '@/components/Help';
 import Room from '@/components/Room';
 import Start from '@/components/Start';
 import { requireNick } from '../services/auth';
@@ -19,6 +21,16 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home,
+    },
+    {
+      path: '/help',
+      name: 'Help',
+      component: Help,
+    },
+    {
+      path: '/create',
+      name: 'Create',
+      component: Create,
       beforeEnter: requireNick,
     },
     {

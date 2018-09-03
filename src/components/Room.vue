@@ -1,7 +1,7 @@
 <template>
   <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
-      <v-card v-if="!start && !winner">
+    <v-flex xs12 sm8 md6 offset-sm2 offset-md3 class="page-content">
+      <v-card v-if="!start && !winner" class="top-card">
         <v-card-title primary-title>
           <div class="room-wrap">
             <div class="headline">Waiting to start...</div>
@@ -13,7 +13,7 @@
               </p>
               <div v-if="!start">
                 <p v-if="user !== admin">Waiting for {{ admin }} to start...</p>
-                <p v-else><v-btn color="primary" @click="startNomming">Start</v-btn></p>
+                <p v-else><v-btn color="primary" @click="handleNomStart">Start</v-btn></p>
               </div>
             </div>
           </div>
@@ -21,9 +21,9 @@
       </v-card>
 
       <div v-if="start && !winner" class="noms">
-        <div class="instructions" v-if="nomnoms.length > 0">
-          <h1>Would you eat here?</h1>
-          <p>Keep swiping left and right. When your group reaches and agreement, we'll let you know!</p>
+        <div class="instructions top-card" v-if="nomnoms.length > 0">
+          <h1>Wanna eat here?</h1>
+          <p>Keep swiping left and right. When your group reaches an agreement, we'll let you know!</p>
         </div>
         <v-card class="nom" v-if="nomnoms.length > 0">
           <v-img
@@ -35,15 +35,16 @@
           <v-card-title primary-title>
             <div class="nom">
               <div class="headline">{{ nomnoms[0].name }}</div>
-              <p class="grey--text">
+              <p class="category-chips">
                 <v-chip color="secondary" v-for="cat in nomnoms[0].categories" :key="cat.title">{{ cat.title}}</v-chip>
               </p>
-              <p class="rating">Yelp Rating: <v-rating v-model="nomnoms[0].rating" half-increments readonly background-color="#cccccc"></v-rating></p>
-              <p class="price">Price Range: {{nomnoms[0].price}}</p>
+              <p class="rating"><span class="sb">Yelp Rating:</span> <v-rating v-model="nomnoms[0].rating" half-increments readonly background-color="#cccccc"></v-rating></p>
+              <p class="price"><span class="sb">Price Range:</span> {{convertPrice(nomnoms[0].price)}}</p>
+              <p class="distance"><span class="sb">Distance:</span> {{convertDistance(nomnoms[0].distance)}}</p>
             </div>
           </v-card-title>
 
-          <v-card-actions>
+          <v-card-actions class="full-width-buttons">
             <v-btn @click="voteNah">Nah</v-btn>
             <v-btn @click="voteYum" color="primary">Yum!</v-btn>
           </v-card-actions>
@@ -52,7 +53,7 @@
       <div v-if="outOfNoms && !winner">
         <p>No more options left... maybe try being a little less picky next time</p>
       </div>
-      <div v-if="winner" class="winner">
+      <div v-if="winner" class="winner top-card">
         <h1>WINNER!</h1>
         <p>Here's your NomNom:</p>
         <v-card class="nom">
@@ -71,11 +72,36 @@
               <p>
                 {{ winningNom.location.display_address.join(', ') }}
               </p>
-              <p><a :href="'https://www.google.com/maps/place/' + encodeURI(winningNom.location.display_address.join(', '))" target="_blank" rel="noopener">Open in google maps</a></p>
+              <p>
+                <a :href="'https://www.google.com/maps/place/' + encodeURI(winningNom.location.display_address.join(', '))" target="_blank" rel="noopener">
+                  Open in Google Maps
+                </a>
+              </p>
             </div>
           </v-card-title>
         </v-card>
       </div>
+
+    <v-dialog v-model="dialog" width="500">
+
+      <v-card>
+        <v-card-title class="headline grey lighten-2" primary-title>
+          Are you sure?
+        </v-card-title>
+
+        <v-card-text>
+          <strong>You are the only user in this room.</strong> NomNom is ideally meant for groups of 2 or more. Do you want to start anyway?
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" flat @click="dialog = false">Cancel</v-btn>
+          <v-btn color="primary" @click="startNomming">Start Anyway</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
     </v-flex>
   </v-layout>
@@ -91,6 +117,7 @@ export default {
   name: 'Room',
   data() {
     return {
+      dialog: false,
       start: false,
       winner: false,
       winningNom: null,
@@ -131,7 +158,15 @@ export default {
         this.winningNom = winner;
       });
     },
+    handleNomStart() {
+      if (this.users.length <= 1) {
+        this.dialog = true;
+      } else {
+        this.startNomming();
+      }
+    },
     startNomming() {
+      this.dialog = false;
       startGame(this.roomId).then(() => {});
     },
     getNoms() {
@@ -157,15 +192,16 @@ export default {
         }
       });
     },
+    convertPrice(yelpPrice) {
+      return yelpPrice === '$' ? 'Low'
+        : yelpPrice === '$$' ? 'Medium'
+        : yelpPrice === '$$$' ? 'High'
+        : yelpPrice === '$$$$' ? 'Ultra High'
+        : 'unknown';
+    },
+    convertDistance(dist) {
+      return (dist / 1609).toFixed(1) + ' miles';
+    },
   },
 };
 </script>
-
-<style>
-.room-wrap, .nom {
-  width: 100%;
-}
-.v-card__actions {
-  justify-content: space-between;
-}
-</style>

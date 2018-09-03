@@ -1,0 +1,54 @@
+.room-wrap, .nom, .card-wrap {
+  width: 100%;
+  text-align: left;
+}
+.v-card__actions {
+  justify-content: space-between;
+}
+.v-rating {
+  margin-left: -4px;
+}
+.v-rating .v-icon {
+  padding: 4px;
+}
+.sb {
+  font-weight: 500;
+  width: 108px;
+}
+.category-chips .v-chip {
+  margin: 0 4px 4px 0;
+  height: 28px;
+  padding: 0 4px;
+}
+.category-chips .v-chip:last-child {
+  margin-right: 0;
+}
+.rating,.price,.distance {
+  margin-bottom: 0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+.full-width-buttons .v-btn {
+  flex: 100%;
+}
+#nomnom *:not(.material-icons) {
+  font-family: 'Montserrat', sans-serif;
+}
+.v-toolbar__items .v-icon {
+  padding-right: 4px;
+}
+.nopad {
+  padding: 0;
+}
+.top-card {
+  margin-top: 20px;
+}
+#nomnom hr {
+  border-top: 1px solid #eee;
+  border-bottom: 0;
+  display: block;
+  height: 1px;
+  padding: 0;
+  margin: 0 0 24px;
+}
