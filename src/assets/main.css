@@ -38,6 +38,9 @@
 #nomnom *:not(.material-icons) {
   font-family: 'Montserrat', sans-serif;
 }
+#nomnom .headline {
+  font-family: 'Montserrat', sans-serif !important;
+}
 .v-toolbar__items .v-icon {
   padding-right: 4px;
 }
