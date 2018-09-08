@@ -35,7 +35,7 @@
       <div v-if="start && !winner" class="noms">
         <div class="instructions top-card" v-if="nomnoms.length > 0">
           <h1>Wanna eat here?</h1>
-          <p>Keep swiping left and right. When your group reaches an agreement, we'll let you know!</p>
+          <p>Hit Yum or Nah on each restaurant to let us know if you want to eat here. When your group reaches an agreement, we'll let you know!</p>
         </div>
         <v-card class="nom" v-if="nomnoms.length > 0">
           <v-img
