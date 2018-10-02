@@ -1,6 +1,6 @@
 # nomnom-ui
 
-> A Vue.js project
+Join our discord for more info: https://discord.gg/rUSdYxV
 
 ## Build Setup
 
