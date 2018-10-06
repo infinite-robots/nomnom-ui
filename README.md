@@ -1,6 +1,11 @@
 # nomnom-ui
 
-Join our discord for more info: https://discord.gg/rUSdYxV
+Join our discord for more info: https://discord.gg/rUSdYxV 
+
+## The Backend 
+This project has two repositories: 
+1. The user-interface - you are here. 
+2. The backend - https://github.com/infinite-robots/nomnom 
 
 ## Build Setup
 
