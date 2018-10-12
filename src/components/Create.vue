@@ -10,7 +10,7 @@
                 Just set your location and search radius, then we'll create a room you can invite your friends to. NomNom will take care of the rest!
               </p>
               <v-flex xs12>
-                <v-text-field  v-model="searchLocation"  label="Enter a Zipcode, City or Address" required></v-text-field>
+                <v-text-field  v-model="searchLocation"  append-icon="gps_fixed" :success=gotLocation @click:append="getLocation()" label="Enter a Zipcode, City or Address" required></v-text-field>
                 <v-subheader class="pl-0">Search Radius (miles)</v-subheader>
                 <v-slider
                   v-model="rangeRadius"
@@ -36,14 +36,28 @@ export default {
   data() {
     return {
       searchLocation: '',
-      rangeRadius: 10
-    }
+      rangeRadius: 10,
+      gpsPosition: false,
+      gotLocation: false,
+    };
   },
   methods: {
     handleCreateRoom() {
-      makeRoom(this.searchLocation, this.rangeRadius).then((resp) => {
+      makeRoom(this.searchLocation, this.rangeRadius, this.gpsPosition).then((resp) => {
         this.$router.push(`/nom/${resp.data.roomId}`);
       });
+    },
+    geoLocationSuccess(position) {
+      console.log(position);
+      const { coords: { latitude, longitude } } = position;
+      this.searchLocation = 'Your GPS position';
+      this.gpsPosition = { latitude, longitude };
+      this.gotLocation = true;
+    },
+    getLocation() {
+      if (navigator && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(this.geoLocationSuccess, (error) => { console.log(error); }, { enableHighAccuracy: true, timeout: 5000 });
+      }
     },
   },
 };
