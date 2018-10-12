@@ -1,5 +1,7 @@
 # nomnom-ui
 
+Group restaurant picker -- create a room based on a location, invite your friends to join the room, then everyone votes yes or no on restaurants until the group comes to a consensus.
+
 Join our discord for more info: https://discord.gg/rUSdYxV 
 
 ## Architecture
