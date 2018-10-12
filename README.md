@@ -2,7 +2,7 @@
 
 Join our discord for more info: https://discord.gg/rUSdYxV 
 
-## The Backend 
+## Architecture
 This project has two repositories: 
 1. The user-interface - you are here. 
 2. The backend - https://github.com/infinite-robots/nomnom 
