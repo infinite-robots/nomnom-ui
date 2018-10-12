@@ -24,6 +24,9 @@
           </div>
         </v-card-title>
       </v-card>
+      <v-snackbar v-model="snackbar" color="red" :bottom="true">
+        {{errorMessage}}
+      </v-snackbar>
     </v-flex>
   </v-layout>
 </template>
@@ -39,6 +42,8 @@ export default {
       rangeRadius: 10,
       gpsPosition: false,
       gotLocation: false,
+      errorMessage: false,
+      snackbar: false,
     };
   },
   methods: {
@@ -54,9 +59,14 @@ export default {
       this.gpsPosition = { latitude, longitude };
       this.gotLocation = true;
     },
+    geoLocationError(error) {
+      console.log(error);
+      this.errorMessage = error.message;
+      this.snackbar = true;
+    },
     getLocation() {
       if (navigator && navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(this.geoLocationSuccess, (error) => { console.log(error); }, { enableHighAccuracy: true, timeout: 5000 });
+        navigator.geolocation.getCurrentPosition(this.geoLocationSuccess, this.geoLocationError, { enableHighAccuracy: true, timeout: 5000 });
       }
     },
   },
