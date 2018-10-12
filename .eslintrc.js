@@ -28,6 +28,8 @@ module.exports = {
     'no-console': 0,
     'func-names': 0,
     'linebreak-style': 0,
+    'no-nested-ternary': 0,
+    'max-len': 0,
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
       js: 'never',
