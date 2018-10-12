@@ -19,7 +19,7 @@
                   max="25"
                 ></v-slider>
               </v-flex>
-              <v-btn color="primary" @click="handleCreateRoom()">Create a Room</v-btn>
+              <v-btn color="primary" :disabled="searchLocation.length <= 1" @click="handleCreateRoom()">Create a Room</v-btn>
             </div>
           </div>
         </v-card-title>
