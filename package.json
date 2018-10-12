@@ -6,7 +6,8 @@
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "test": "npm run lint && ava"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
+    "ava": "^0.25.0",
     "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",

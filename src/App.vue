@@ -60,15 +60,15 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      drawer: false
-    }),
+export default {
+  data: () => ({
+    drawer: false,
+  }),
 
-    props: {
-      source: String
-    }
-  }
+  props: {
+    source: String,
+  },
+};
 </script>
 
 <style>

@@ -10,8 +10,8 @@ import router from './router';
 Vue.use(Vuetify, {
   theme: {
     primary: '#f19a24',
-    secondary: '#FFCD89'
-  }
+    secondary: '#FFCD89',
+  },
 });
 
 Vue.prototype.$http = axios;

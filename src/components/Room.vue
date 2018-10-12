@@ -213,18 +213,18 @@ export default {
     convertPrice(yelpPrice) {
       return yelpPrice === '$' ? 'Low'
         : yelpPrice === '$$' ? 'Medium'
-        : yelpPrice === '$$$' ? 'High'
-        : yelpPrice === '$$$$' ? 'Ultra High'
-        : 'unknown';
+          : yelpPrice === '$$$' ? 'High'
+            : yelpPrice === '$$$$' ? 'Ultra High'
+              : 'unknown';
     },
     convertDistance(dist) {
-      return (dist / 1609).toFixed(1) + ' miles';
+      return `${(dist / 1609).toFixed(1)} miles`;
     },
     clipboard() {
       this.$refs.nomlink.select();
       document.execCommand('copy');
       this.snackbar = true;
-    }
+    },
   },
 };
 </script>
