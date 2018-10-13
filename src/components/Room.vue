@@ -33,34 +33,36 @@
       </v-card>
 
       <div v-if="start && !winner" class="noms">
-        <div class="instructions top-card" v-if="nomnoms.length > 0">
-          <h1>Wanna eat here?</h1>
-          <p>Hit Yum or Nah on each restaurant to let us know if you want to eat here. When your group reaches an agreement, we'll let you know!</p>
-        </div>
-        <v-card class="nom" v-if="nomnoms.length > 0">
-          <v-img
-            :src="nomnoms[0].image_url"
-            height="200px"
-          >
-          </v-img>
+        <span v-touch="{left: voteYum, right: voteNah}">
+          <div class="instructions top-card" v-if="nomnoms.length > 0">
+            <h1>Wanna eat here?</h1>
+            <p>Hit Yum or Nah on each restaurant to let us know if you want to eat here. When your group reaches an agreement, we'll let you know!</p>
+          </div>
+          <v-card class="nom" v-if="nomnoms.length > 0">
+            <v-img
+              :src="nomnoms[0].image_url"
+              height="200px"
+            >
+            </v-img>
 
-          <v-card-title primary-title>
-            <div class="nom">
-              <div class="headline">{{ nomnoms[0].name }}</div>
-              <p class="category-chips">
-                <v-chip color="secondary" v-for="cat in nomnoms[0].categories" :key="cat.title">{{ cat.title}}</v-chip>
-              </p>
-              <p class="rating"><span class="sb">Yelp Rating:</span> <v-rating v-model="nomnoms[0].rating" half-increments readonly background-color="#cccccc"></v-rating></p>
-              <p class="price"><span class="sb">Price Range:</span> {{convertPrice(nomnoms[0].price)}}</p>
-              <p class="distance"><span class="sb">Distance:</span> {{convertDistance(nomnoms[0].distance)}}</p>
-            </div>
-          </v-card-title>
+            <v-card-title primary-title>
+              <div class="nom">
+                <div class="headline">{{ nomnoms[0].name }}</div>
+                <p class="category-chips">
+                  <v-chip color="secondary" v-for="cat in nomnoms[0].categories" :key="cat.title">{{ cat.title}}</v-chip>
+                </p>
+                <p class="rating"><span class="sb">Yelp Rating:</span> <v-rating v-model="nomnoms[0].rating" half-increments readonly background-color="#cccccc"></v-rating></p>
+                <p class="price"><span class="sb">Price Range:</span> {{convertPrice(nomnoms[0].price)}}</p>
+                <p class="distance"><span class="sb">Distance:</span> {{convertDistance(nomnoms[0].distance)}}</p>
+              </div>
+            </v-card-title>
 
-          <v-card-actions class="full-width-buttons">
-            <v-btn @click="voteNah">Nah</v-btn>
-            <v-btn @click="voteYum" color="primary">Yum!</v-btn>
-          </v-card-actions>
-        </v-card>
+            <v-card-actions class="full-width-buttons">
+              <v-btn @click="voteNah">Nah</v-btn>
+              <v-btn @click="voteYum" color="primary">Yum!</v-btn>
+            </v-card-actions>
+          </v-card>
+        </span>
       </div>
       <div v-if="outOfNoms && !winner">
         <p>No more options left... maybe try being a little less picky next time</p>
