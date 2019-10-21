@@ -17,6 +17,10 @@
           <v-flex xs12 text-xs-left>
             <h1>Latest News</h1>
             <hr />
+            <h3>NomNom accepting PRs!</h3>
+            <p class="caption">October 21, 2019</p>
+            <p>Let's keep this project alive! Open a PR on github.com.</p>
+            <hr />
             <h3>NomNom alpha version released!</h3>
             <p class="caption">September 3rd, 2018</p>
             <p>We are happy to announce the release of our alpha version (0.0.1). Please let us know how the app is working for you!</p>
