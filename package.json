@@ -10,7 +10,7 @@
     "test": "npm run lint && ava"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "socket.io": "^2.1.1",
     "socket.io-client": "^2.1.1",
     "vue": "^2.5.2",
